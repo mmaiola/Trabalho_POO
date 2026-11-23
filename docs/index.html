@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oficina Garagem | Documentação</title>
+  <style>
+    :root { --bg:#f4f6f9; --card:#fff; --text:#202938; --accent:#2457a7; }
+    * { box-sizing:border-box; }
+    body { margin:0; font:16px/1.6 Arial,sans-serif; background:var(--bg); color:var(--text); }
+    header { background:#14243b; color:white; padding:42px 8%; }
+    header h1 { margin:0 0 8px; font-size:2.2rem; }
+    main { max-width:1050px; margin:28px auto; padding:0 18px 40px; }
+    section { background:var(--card); margin:18px 0; padding:24px; border-radius:12px; box-shadow:0 3px 14px #15243b12; }
+    h2 { color:var(--accent); margin-top:0; }
+    table { width:100%; border-collapse:collapse; }
+    th,td { padding:11px; text-align:left; border-bottom:1px solid #e4e8ef; vertical-align:top; }
+    th { background:#eef3fa; }
+    code, pre { background:#eef2f7; border-radius:6px; padding:3px 6px; }
+    pre { padding:16px; overflow-x:auto; }
+    footer { text-align:center; padding:25px; color:#667085; }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Oficina Garagem</h1>
+  <p>Sistema de gerenciamento de clientes, veículos, serviços e ordens de serviço.</p>
+</header>
+<main>
+  <section>
+    <h2>1. Tema escolhido</h2>
+    <p>Gestão de uma oficina mecânica, com foco no registro de clientes, veículos atendidos, serviços oferecidos e acompanhamento das ordens de serviço.</p>
+  </section>
+  <section>
+    <h2>2. Descrição do problema</h2>
+    <p>Oficinas precisam manter organizadas as informações de seus clientes e veículos, registrar os serviços solicitados e acompanhar o andamento dos atendimentos. Quando esses dados são controlados manualmente, podem ocorrer perda de informações, dificuldade de consulta e falta de histórico dos serviços.</p>
+  </section>
+  <section>
+    <h2>3. Objetivo do sistema</h2>
+    <p>O Oficina Garagem tem como objetivo oferecer uma aplicação simples, executada pelo terminal, para cadastrar e consultar clientes, veículos e serviços, além de abrir ordens de serviço e atualizar seu status. As informações são armazenadas em arquivos locais, permanecendo disponíveis após o encerramento do programa.</p>
+  </section>
+  <section>
+    <h2>4. Requisitos funcionais</h2>
+    <table>
+      <thead><tr><th>Código</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td>RF01</td><td>O sistema deve permitir cadastrar clientes, armazenando nome e telefone.</td></tr>
+        <tr><td>RF02</td><td>O sistema deve listar os clientes cadastrados.</td></tr>
+        <tr><td>RF03</td><td>O sistema deve permitir cadastrar veículos vinculados a um cliente existente.</td></tr>
+        <tr><td>RF04</td><td>O sistema deve listar os veículos cadastrados e seus respectivos proprietários por identificador.</td></tr>
+        <tr><td>RF05</td><td>O sistema deve permitir cadastrar serviços com descrição e valor.</td></tr>
+        <tr><td>RF06</td><td>O sistema deve permitir abrir uma ordem de serviço relacionando cliente, veículo e serviço.</td></tr>
+        <tr><td>RF07</td><td>O sistema deve listar as ordens de serviço registradas.</td></tr>
+        <tr><td>RF08</td><td>O sistema deve permitir atualizar o status de uma ordem de serviço.</td></tr>
+        <tr><td>RF09</td><td>O sistema deve salvar e recuperar os registros em arquivos locais.</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section>
+    <h2>5. Diagrama de classes UML</h2>
+    <pre>
++-------------------+       1       0..* +-------------------+
+|      Cliente      |--------------------|      Veiculo      |
++-------------------+                    +-------------------+
+| - id: int         |                    | - id: int         |
+| - nome: String    |                    | - marca: String   |
+| - telefone:String |                    | - modelo: String  |
++-------------------+                    | - ano: int        |
+| + getId(): int    |                    | - placa: String   |
+| + toLinha():String|                    | - clienteId: int  |
++-------------------+                    +-------------------+
+                                                  |
+                                                  | 1
+                                                  | 
+                                                  | 0..*
++-------------------+       1       0..* +----------------------+
+|      Servico      |--------------------|    OrdemServico      |
++-------------------+                    +----------------------+
+| - id: int         |                    | - id: int            |
+| - descricao:String|                    | - clienteId: int     |
+| - valor: double   |                    | - veiculoId: int     |
++-------------------+                    | - servicoId: int     |
+| + getValor():double|                   | - data: LocalDate    |
+| + toLinha():String|                    | - status: String     |
++-------------------+                    +----------------------+
+                                         | + setStatus(): void  |
+                                         | + toLinha(): String  |
+                                         +----------------------+
+
+Dados: responsabilidade de ler e gravar os registros nos arquivos CSV.
+Main: apresenta o menu e coordena as operações do sistema.
+    </pre>
+    <p>Relacionamentos: um cliente pode possuir vários veículos; cada ordem de serviço referencia um cliente, um veículo e um serviço do catálogo. A classe <code>Dados</code> centraliza a persistência em arquivos.</p>
+  </section>
+  <section>
+    <h2>6. Tecnologias e execução</h2>
+    <p>Java 17 ou superior, terminal e arquivos CSV locais. Para executar, compile os arquivos Java e inicie a classe <code>oficina.Main</code>, conforme os comandos disponíveis no README do repositório.</p>
+  </section>
+</main>
+<footer>Oficina Garagem — Projeto acadêmico de Programação Orientada a Objetos.</footer>
+</body>
+</html>
