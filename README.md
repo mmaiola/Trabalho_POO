@@ -37,5 +37,9 @@ Os arquivos de dados são criados automaticamente na pasta `dados/` após os pri
 - **`OrdemServico`:** relaciona cliente, veículo e serviço.
 - **`Dados`:** leitura e escrita dos arquivos.
 - **`Main`:** menu e fluxo de interação.
+- A documentação HTML está em `docs/index.html`.
 
-A documentação HTML está em `docs/index.html`.
+### 5️⃣ Imagem do diagrama
+<img width="593" height="588" alt="diagrama" src="https://github.com/user-attachments/assets/f6bd2539-2209-4458-a5ab-d09c43ba0b8b" />
+
+
